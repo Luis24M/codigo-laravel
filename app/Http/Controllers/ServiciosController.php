@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Iluminate\Http\Request;
+use Illuminate\Http\Request;
+use App\Models\Servicio;
 
-class ServiciosController extends Controller{
+class ServiciosController extends Controller
+{
+ #   /**
+ #    * @param \Illuminate\Http\Request $request
+ #    * @return \Illuminate\Http\Response
+ #    */
+    
+
     public function index(){
-        $servicios = [
-            ['titulo' => 'Servicios 01'],
-            ['titulo' => 'Servicios 02'],
-            ['titulo' => 'Servicios 03'],
-            ['titulo' => 'Servicios 04'],
-            ['titulo' => 'Servicios 05']
-        ];
+        $servicios = Servicio::get();
+        $servicios = Servicio::orderBy('titulo', 'asc')->get();
+        #$servicios = Servicio::latest()->paginate(2);
         return view('servicios', compact('servicios'));
+    }
+    public function show($id){
+        return view('show',[
+            'servicio' => Servicio::find($id)
+        ]);
     }
 }
