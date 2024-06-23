@@ -33,4 +33,14 @@ class ServiciosController extends Controller
 
         return redirect()->route('servicios.index');
     }
+    public function edit($id){
+        return view('edit',[
+            'servicio' => $id
+        ]);
+    }
+
+    public function update(Servicio $servicio ,CreateServicioRequest $request){
+        $servicio->update($request->validated());
+        return redirect()->route('servicios.show', $servicio);
+    }
 }
