@@ -13,16 +13,11 @@ class MensajeRecibido extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = 'Mensaje Recibido';
-    public $mensaje;
+    public $subject= 'Mensaje Recibido';
+    public $mensaje; 
     /**
      * Create a new message instance.
      */
-
-    public function build(){
-        return $this->view('emails.mensaje-recibido');
-    }
-    
     public function __construct($mensaje)
     {
         $this->mensaje = $mensaje;
@@ -41,12 +36,12 @@ class MensajeRecibido extends Mailable
     /**
      * Get the message content definition.
      */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
+    // public function content(): Content
+    // {
+    //     return new Content(
+    //         view: 'view.name',
+    //     );
+    // }
 
     /**
      * Get the attachments for the message.
@@ -56,5 +51,10 @@ class MensajeRecibido extends Mailable
     public function attachments(): array
     {
         return [];
+    }
+
+    public function build()
+    {
+        return $this->view('emails.mensaje-recibido');
     }
 }

@@ -21,7 +21,7 @@ class ContactoController extends Controller
             'mensaje.required' => 'Ingresa el mensaje',
 
         ]);
-        Mail::to('luno2402@gmail.com')->queue(new MensajeRecibido($mensaje));
+        Mail::to('luno2402@gmail.com')->send(new MensajeRecibido($mensaje));
         return new MensajeRecibido($mensaje);
         return 'Datos validados';
     }
