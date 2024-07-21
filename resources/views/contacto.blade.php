@@ -3,6 +3,9 @@
 @section('title', 'Contacto')
 
 @section('content')
+    @if(session('estado'))
+        {{ session('estado') }}
+    @else
     <h1 class="text-center text-3xl mt-5">Contacto</h1>
     <form action="{{ route('contacto') }}" method="post">
         @csrf
@@ -20,4 +23,5 @@
         {{ $errors->first('mensaje') }}
         <button type="submit" class="block w-full mt-5 bg-blue-500 text-white p-3 rounded">Enviar</button>
     </form>
+    @endif
 @endsection

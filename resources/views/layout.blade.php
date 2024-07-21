@@ -8,6 +8,7 @@
 </head>
 <body>
   @include('partials.nav')
+  @include('partials.sesion-estado')
   @yield('content')
 </body>
 </html>

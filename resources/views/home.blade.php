@@ -1,7 +1,16 @@
 @extends('layout')
 
-@section('title', 'Home')
+@section('title','Home')
 
 @section('content')
-    <h1 class="text-3xl text-center mt-5">Home</h1>
+    <tr>
+        <td colspan="4">Home</td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            @auth
+              {{auth()->user()->name}}  
+            @endauth
+        </td>
+    </tr>
 @endsection

@@ -22,7 +22,8 @@ class ContactoController extends Controller
 
         ]);
         Mail::to('luno2402@gmail.com')->send(new MensajeRecibido($mensaje));
-        return new MensajeRecibido($mensaje);
-        return 'Datos validados';
+        return back()->with('estado', 'Recibimos tu mensaje, te responderemos en menos de 24 horas');
+        // return new MensajeRecibido($mensaje);
+        // return 'Datos validados';
     }
 }

@@ -3,8 +3,10 @@
 @section('title', 'Servicios')
 
 @section('content')
+    @auth
     <h1 class="text-3xl text-center mt-5">Servicios</h1>
     <a href="{{ route('servicios.create') }}">Nuevo Servicio</a>
+    @endauth
     <ul class="m-4 flex gap-4">
       @if($servicios)
         @foreach($servicios as $servicio)
