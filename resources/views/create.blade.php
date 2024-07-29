@@ -4,8 +4,13 @@
 
 @section('content')
   <h1 class="text-center text-2xl">Crear nuevo servico</h1>
-  <form class="mx-10" action="{{ route('servicios.store') }}" method="post">
+  <form class="mx-10" action="{{ route('servicios.store') }}" method="post"  enctype="multipart/form-data">
       @csrf
+      <label for="customFile">
+            Imagen del servicio <br>
+            <input type="file" name="image" class="border" id="customFile" >
+            {{ $errors->first('image') }}
+      </label>
       <label>
           Titulo del servicio <br>
           <input type="text" name="titulo" class="border">

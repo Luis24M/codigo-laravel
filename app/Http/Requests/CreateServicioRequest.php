@@ -23,7 +23,11 @@ class CreateServicioRequest extends FormRequest
     {
         return [
             'titulo' => 'required',
-            'descripcion' => 'required'
+            'descripcion' => 'required',
+            'image' => [
+                $this->route('servicio') ? 'nullable' : 'required',
+                'mimes:jpeg,png',
+            ],
         ];
     }
     public function messages(): array

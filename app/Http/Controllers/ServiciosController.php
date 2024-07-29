@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Servicio;
 use App\Http\Requests\CreateServicioRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ServiciosController extends Controller
 {
@@ -34,7 +35,9 @@ class ServiciosController extends Controller
 
     public function store(CreateServicioRequest $request){
         
-        Servicio::create($request->validated());
+        $servicio = new Servicio($request->validated());
+        $servicio->image = $request->file('image')->store('images');
+        $servicio->save();
         return redirect()->route('servicios.index')->with('estado', 'El servicio fue creado con éxito');
     }
 
@@ -45,11 +48,21 @@ class ServiciosController extends Controller
     }
 
     public function update(Servicio $servicio, CreateServicioRequest $request){
-        $servicio->update($request->validated());
+
+        if( $request->hasFile('image') ){
+            Storage::delete($servicio->image);
+            $servicio->Fill( $request->validated() );
+            $servicio->image = $request->file('image')->store('images');
+            $servicio->save();
+        }else{
+            $servicio->update( array_filter($request->validated()) );
+        }
+        
         return redirect()->route('servicios.show', $servicio)->with('estado', 'El servicio fue actualizado con éxito');
     }
 
     public function destroy(Servicio $servicio){
+        Storage::delete($servicio->image);
         $servicio->delete();
         return redirect()->route('servicios.index')->with('estado', 'El servicio fue eliminado con éxito');
     }

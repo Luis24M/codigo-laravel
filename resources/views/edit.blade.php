@@ -4,6 +4,7 @@
 
 @section('content')
 @auth
+<img src="/storage/{{ $servicio->image }}" alt="{{ $servicio->titulo }}" width="300" height="100">
 <h1>Editar Servicio</h1>
 @if($errors->any())
   <ul>
@@ -12,7 +13,7 @@
     @endforeach
   </ul>
 @endif
-<form class="m-5" action="{{ route('servicios.update', $servicio) }}" method="post">
+<form class="m-5" action="{{ route('servicios.update', $servicio) }}" method="post" enctype="multipart/form-data">
   @csrf @method('PATCH')
   <h2>Titulo</h2>
   <input class="border"
